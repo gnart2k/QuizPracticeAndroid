@@ -1,8 +1,10 @@
-package com.example.quizpractice;
+package com.example.quizpractice.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.quizpractice.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
