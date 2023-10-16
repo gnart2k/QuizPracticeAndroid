@@ -4,9 +4,11 @@ import java.lang.annotation.Documented;
 
 //import com.google.firebase.firestone.DocumentId;
 public class QuizListModel {
-    //@DocumentedId
-    private String quizId,title,image,difficulty;;
+    //@DocumentedId`
+    private String quizId, title, image, difficulty;
+    ;
     private long questions;
+    //generate contructor getter setter for each attribute
 
     public QuizListModel(String quizId, String title, String image, String difficulty, long questions) {
         this.quizId = quizId;
