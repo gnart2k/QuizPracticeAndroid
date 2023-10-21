@@ -56,4 +56,6 @@ public class SplashFragment extends Fragment {
         }, 4000);
 
     }
+
+
 }
