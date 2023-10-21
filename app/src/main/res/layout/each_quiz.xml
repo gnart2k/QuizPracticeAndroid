@@ -6,19 +6,28 @@
     android:id="@+id/constraintLayout"
     android:layout_margin="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="6dp"
         app:cardElevation="8dp"
-        app:cardCornerRadius="6dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageView
+                android:id="@+id/quizImageList"
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
-                android:id="@+id/quizImageList"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/quizTitleList"
