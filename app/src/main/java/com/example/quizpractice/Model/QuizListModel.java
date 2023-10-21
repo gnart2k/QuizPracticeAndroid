@@ -1,16 +1,18 @@
 package com.example.quizpractice.Model;
 
+import com.google.firebase.firestore.DocumentId;
+
 import java.lang.annotation.Documented;
 
-//import com.google.firebase.firestone.DocumentId;
+
 public class QuizListModel {
-    //@DocumentedId`
+    @DocumentId
     private String quizId, title, image, difficulty;
     ;
-    private long questions;
-    //generate contructor getter setter for each attribute
+    private int questions;
+    //tao contructor va getter setter cho attribute
 
-    public QuizListModel(String quizId, String title, String image, String difficulty, long questions) {
+    public QuizListModel(String quizId, String title, String image, String difficulty, int questions) {
         this.quizId = quizId;
         this.title = title;
         this.image = image;
@@ -50,11 +52,11 @@ public class QuizListModel {
         this.difficulty = difficulty;
     }
 
-    public long getQuestions() {
+    public int getQuestions() {
         return questions;
     }
 
-    public void setQuestions(long questions) {
+    public void setQuestions(int questions) {
         this.questions = questions;
     }
 }
