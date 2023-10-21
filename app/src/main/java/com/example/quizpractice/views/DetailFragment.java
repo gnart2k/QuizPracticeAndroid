@@ -11,33 +11,33 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.quizpractice.Model.QuizListModel;
 import com.example.quizpractice.R;
 import com.example.quizpractice.viewmodel.QuizListViewModel;
 
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DetailFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DetailFragment extends Fragment {
 
-    private TextView title, difficulty, totalQuestion;
+    private TextView title, difficulty, totalQuestions;
     private Button startQuizBtn;
     private NavController navController;
     private int position;
     private ProgressBar progressBar;
-
     private QuizListViewModel viewModel;
+    private ImageView topicImage;
+    private String quizId;
+    private long totalQueCount;
 
 
     @Override
@@ -60,20 +60,41 @@ public class DetailFragment extends Fragment {
 
         title = view.findViewById(R.id.detailFragmentDifficulty);
         difficulty = view.findViewById(R.id.detailFragmentDifficulty);
-        totalQuestion = view.findViewById(R.id.detailFragmentQuestions);
+        totalQuestions = view.findViewById(R.id.detailFragmentQuestions);
         startQuizBtn = view.findViewById(R.id.startQuizBtn);
-
+        ProgressBar progressBar = view.findViewById(R.id.detailProgressBar);
         navController = Navigation.findNavController(view);
+        topicImage = view.findViewById(R.id.detailFragmentImage);
+        //position = DetailFragmentArgs.fromBundle(getArguments()).getPosition();
 
-        position = DetailFragmentArgs.fromBundle(getArguments()).getPosition();
-
-        viewModel.getQuizListMutableLiveData().observe(getViewLifecycleOwner(), new Observer<List<QuizListModel>>() {
+        viewModel.getQuizListLiveData().observe(getViewLifecycleOwner(), new Observer<List<QuizListModel>>() {
             @Override
             public void onChanged(List<QuizListModel> quizListModels) {
-                QuizListModel quiz = QuizListModel.get(position);
-                difficulty.setText(quiz.getDifficulty());
-                title.setText(quiz.getTitle());
-                totalQuestion.setText(String.valueOf(quiz.getQuestions()));
+//                QuizListModel quiz = QuizListModel.get(position);
+//                difficulty.setText(quiz.getDifficulty());
+//                title.setText(quiz.getTitle());
+//                totalQuestions.setText(String.valueOf(quiz.getQuestions()));
+//                Glide.with(view).load(quiz.getImage()).into(topicImage);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                },2000);
+//                totalQueCount = quiz.getQuestions();
+//                quizId = quiz.getQuizId();
+            }
+        });
+        startQuizBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                DetailFragmentDirections.ActionDetailFragmentToQuizFragment action =
+//                        DetailFragmentDirections.actionDetailFragmentToQuizFragment();
+//
+//                action.setQuizId(quizId);
+//                action.setTotalQueCount(totalQueCount);
+                //navController.navigate(action);
             }
         });
     }

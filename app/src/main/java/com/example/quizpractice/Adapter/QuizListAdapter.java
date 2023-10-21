@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.QuizListViewHolder> {
     public List<QuizListModel> quizListModels;
+    private OnItemCLickedListener onItemCLickedListener;
 
     public List<QuizListModel> getQuizListModels() {
         return quizListModels;
@@ -25,7 +27,9 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.QuizLi
     public void setQuizListModels(List<QuizListModel> quizListModels) {
         this.quizListModels = quizListModels;
     }
-
+    public QuizListAdapter(OnItemCLickedListener onItemCLickedListener){
+        this.onItemCLickedListener  = onItemCLickedListener;
+    }
     @NonNull
     @Override
     public QuizListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,17 +46,32 @@ public class QuizListAdapter extends RecyclerView.Adapter<QuizListAdapter.QuizLi
 
     @Override
     public int getItemCount() {
-        return quizListModels.size();
+        if (quizListModels == null){
+            return 0;
+        } else {
+            return quizListModels.size();
+        }
     }
 
-    public class QuizListViewHolder extends RecyclerView.ViewHolder{
+    public class QuizListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView title;
         public ImageView quizImage;
+        ConstraintLayout constraintLayout;
 
         public QuizListViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.quizTitleList);
             quizImage = itemView.findViewById(R.id.quizImageList);
+            constraintLayout = itemView.findViewById(R.id.constraintLayout);
+            constraintLayout.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onItemCLickedListener.onItemClick(getAdapterPosition());
+        }
+    }
+    public interface OnItemCLickedListener{
+        void onItemClick(int positon);
     }
 }

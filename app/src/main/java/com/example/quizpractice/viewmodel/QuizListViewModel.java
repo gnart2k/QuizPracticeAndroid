@@ -11,15 +11,15 @@ import com.example.quizpractice.repository.QuizListDatabase;
 import java.util.List;
 
 public class QuizListViewModel extends ViewModel implements QuizListDatabase.onFirestoneTaskComplete {
-    private MutableLiveData<List<QuizListModel>> quizListMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<QuizListModel>> quizListLiveData = new MutableLiveData<>();
     private QuizListDatabase database =new QuizListDatabase(this);
 
-    public MutableLiveData<List<QuizListModel>> getQuizListMutableLiveData() {
-        return quizListMutableLiveData;
+    public MutableLiveData<List<QuizListModel>> getQuizListLiveData() {
+        return quizListLiveData;
     }
 
-    public void setQuizListMutableLiveData(MutableLiveData<List<QuizListModel>> quizListMutableLiveData) {
-        this.quizListMutableLiveData = quizListMutableLiveData;
+    public void setQuizListLiveData(MutableLiveData<List<QuizListModel>> quizListMutableLiveData) {
+        this.quizListLiveData = quizListMutableLiveData;
     }
 
     public QuizListDatabase getDatabase() {
@@ -36,7 +36,7 @@ public class QuizListViewModel extends ViewModel implements QuizListDatabase.onF
 
     @Override
     public void quizLoad(List<QuizListModel> quizListModels) {
-        quizListMutableLiveData.setValue(quizListModels);
+        quizListLiveData.setValue(quizListModels);
     }
 
     @Override
