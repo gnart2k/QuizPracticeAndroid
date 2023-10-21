@@ -12,10 +12,10 @@ import com.example.quizpractice.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SignInFragment#newInstance} factory method to
+ * Use the {@link ResultFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SignInFragment extends Fragment {
+public class ResultFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class SignInFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public SignInFragment() {
+    public ResultFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class SignInFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SignInFragment.
+     * @return A new instance of fragment ResultFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SignInFragment newInstance(String param1, String param2) {
-        SignInFragment fragment = new SignInFragment();
+    public static ResultFragment newInstance(String param1, String param2) {
+        ResultFragment fragment = new ResultFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class SignInFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_in, container, false);
+        return inflater.inflate(R.layout.fragment_result, container, false);
     }
 }
