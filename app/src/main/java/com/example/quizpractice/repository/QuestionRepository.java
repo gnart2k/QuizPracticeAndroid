@@ -26,7 +26,7 @@ public class QuestionRepository {
     }
 
     public void getQuestions(){
-        firebaseFirestore.collection("Quiz").document()
+        firebaseFirestore.collection("Quiz").document(quizID)
                 .collection("questions").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
