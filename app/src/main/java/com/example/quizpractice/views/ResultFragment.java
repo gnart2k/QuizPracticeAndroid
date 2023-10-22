@@ -2,65 +2,89 @@ package com.example.quizpractice.views;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.quizpractice.R;
+import com.example.quizpractice.repository.QuestionRepository;
+import com.example.quizpractice.viewmodel.QuestionViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ResultFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.HashMap;
+
+
 public class ResultFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ResultFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ResultFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ResultFragment newInstance(String param1, String param2) {
-        ResultFragment fragment = new ResultFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private NavController navController;
+    private QuestionViewModel viewModel;
+    private TextView correctAnswer, wrongAnswer , notAnswered;
+    private TextView percentTv;
+    private ProgressBar scoreProgressbar;
+    private String quizId;
+    private Button homeBtn;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@javax.annotation.Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
+        viewModel = new ViewModelProvider(this , ViewModelProvider.AndroidViewModelFactory
+                .getInstance(getActivity().getApplication())).get(QuestionViewModel.class);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_result, container, false);
+    }
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+
+        navController = Navigation.findNavController(view);
+        correctAnswer = view.findViewById(R.id.correctAnswerTv);
+        wrongAnswer = view.findViewById(R.id.wrongAnswerTv);
+        notAnswered = view.findViewById(R.id.notAnsweredTv);
+        percentTv = view.findViewById(R.id.resultPercentageTv);
+        scoreProgressbar = view.findViewById(R.id.resultCountProgressBar);
+        homeBtn = view.findViewById(R.id.home_btn);
+
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_listFragment_to_detailFragment);
+            }
+        });
+        quizId = ResultFragmentArgs.fromBundle(getArguments()).getQuizId();
+        viewModel.getResults();
+        viewModel.setQuizId(quizId);
+        viewModel.getResultMutableLiveData().observe(getViewLifecycleOwner(), new Observer<HashMap<String, Long>>() {
+            @Override
+            public void onChanged(HashMap<String, Long> stringLongHashMap) {
+                Long correct = stringLongHashMap.get("correct");
+                Long wrong = stringLongHashMap.get("wrong");
+                Long noAnswer = stringLongHashMap.get("notAnswered");
+
+                correctAnswer.setText(correct.toString());
+                wrongAnswer.setText(wrong.toString());
+                notAnswered.setText(noAnswer.toString());
+
+                long total = correct + wrong + noAnswer;
+                long percent = (correct*100)/total;
+
+                percentTv.setText(String.valueOf(percent));
+                scoreProgressbar.setProgress((int) percent);
+            }
+        });
     }
 }

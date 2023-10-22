@@ -8,13 +8,23 @@ import androidx.lifecycle.ViewModel;
 import com.example.quizpractice.Model.QuestionModel;
 import com.example.quizpractice.repository.QuestionRepository;
 
+import java.util.HashMap;
 import java.util.List;
 
-public class QuestionViewModel extends ViewModel implements QuestionRepository.OnQuestionLoad {
+public class QuestionViewModel extends ViewModel implements QuestionRepository.OnQuestionLoad, QuestionRepository.OnResultAdded, QuestionRepository.OnResultLoad {
 
 
     private MutableLiveData<List<QuestionModel>> questionMutableLiveData;
     private QuestionRepository repository;
+    private MutableLiveData<HashMap<String , Long>> resultMutableLiveData;
+
+    public MutableLiveData<HashMap<String, Long>> getResultMutableLiveData() {
+        return resultMutableLiveData;
+    }
+
+    public void getResults(){
+        repository.getResults();
+    }
 
     public MutableLiveData<List<QuestionModel>> getQuestionMutableLiveData() {
         return questionMutableLiveData;
@@ -22,9 +32,11 @@ public class QuestionViewModel extends ViewModel implements QuestionRepository.O
 
     public QuestionViewModel(){
         questionMutableLiveData = new MutableLiveData<>();
-        repository = new QuestionRepository(this);
+        repository = new QuestionRepository(this, this, this);
     }
-
+    public void addResults(HashMap<String , Object> resultMap){
+        repository.addResults(resultMap);
+    }
     @Override
     public void onLoad(List<QuestionModel> questionModels) {
         questionMutableLiveData.setValue(questionModels);
@@ -32,7 +44,22 @@ public class QuestionViewModel extends ViewModel implements QuestionRepository.O
 
     public  void setQuizId(String quizId){
         repository.setQuizID(quizId);
+        //repository.getQuestions();
+
+    }
+
+    public void getQuestion(){
         repository.getQuestions();
+    }
+
+    @Override
+    public boolean onSubmit() {
+        return true;
+    }
+
+    @Override
+    public void onResultLoad(HashMap<String, Long> resultMap) {
+        resultMutableLiveData.setValue(resultMap);
     }
 
     @Override
