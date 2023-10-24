@@ -28,11 +28,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the  factory method to
- * create an instance of this fragment.
- */
 public class QuizFragment extends Fragment implements View.OnClickListener {
     private QuestionViewModel viewModel;
     private NavController navController;
@@ -87,8 +82,8 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
 
         viewModel.setQuizId(quizId);
 
-        //quizId = QuizFragmentArgs.fromBundle(getArguments()).getQuizid();
-        //totalQuestion = QuizFragmentArgs.fromBundle(getArguments()).getTotalQueCount();
+        quizId = QuizFragmentArgs.fromBundle(getArguments()).getQuizId();
+        totalQuestion = QuizFragmentArgs.fromBundle(getArguments()).getTotalQueCount();
         viewModel.setQuizId(quizId);
         viewModel.getQuestion();
 
@@ -100,7 +95,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         closeQuizBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_QuizFragemnt_to_ListFragment);
+                navController.navigate(R.id.action_quizragment_to_listFragment);
             }
         });
 
@@ -146,31 +141,32 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        startTimer(i);
+        startTimer();
         canAnswer = true;
     }
 
-    private void startTimer(int i){
-          timerCountTv.setText(String.valueOf(timer));
-          progressBar.setVisibility(View.VISIBLE);
-          countDownTimer = new CountDownTimer(timer * 1000, 1000) {
-              @Override
-              public void onTick(long l) {
-                  //update time
-                  timerCountTv.setText(millisUntilFinished / 1000 + "");
+    private void startTimer(){
+        timerCountTv.setText(String.valueOf(timer));
+        progressBar.setVisibility(View.VISIBLE);
 
-                  Long percent = millisUntilFinished/(timer * 10);
-                  progressBar.setProgress(percent.intValue());
-              }
+        countDownTimer = new CountDownTimer(timer * 1000 , 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // update time
+                timerCountTv.setText(millisUntilFinished / 1000 + "");
 
-              @Override
-              public void onFinish() {
-                    canAnswer = false;
-                    ansFeedbackTv.setText("TImes up !! No Answer selected");
-                    notAnswer++;
-                    showNextBtn();
-              }
-          }.start();
+                Long percent = millisUntilFinished/(timer*10);
+                progressBar.setProgress(percent.intValue());
+            }
+
+            @Override
+            public void onFinish() {
+                canAnswer = false;
+                ansFeedbackTv.setText("Times Up !! No answer selected");
+                notAnswer ++;
+                showNextBtn();
+            }
+        }.start();
     }
 
     private void showNextBtn() {
@@ -184,30 +180,28 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
             ansFeedbackTv.setVisibility(View.VISIBLE);
         }
     }
-
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.option1Btn:
-                verifyAnswer(option1Btn);
-                break;
-            case R.id.option2Btn:
-                verifyAnswer(option2Btn);
-                break;
-            case R.id.option3Btn:
-                verifyAnswer(option3Btn);
-                break;
-            case R.id.nextQueBtn:
-                if(currentQueNo == totalQuestion){
+        int selectedId = v.getId();
+        if(selectedId == R.id.option1Btn) {
+            verifyAnswer(option1Btn);
+        }else if(selectedId == R.id.option1Btn) {
+            verifyAnswer(option1Btn);
+        }else if(selectedId == R.id.option2Btn) {
+            verifyAnswer(option2Btn);
+        }else if(selectedId == R.id.option3Btn) {
+            verifyAnswer(option3Btn);
+        }else if(selectedId ==R.id.nextQueBtn){
+                if (currentQueNo == totalQuestion){
                     submitResults();
-                }else {
+                }else{
                     currentQueNo ++;
                     loadQuestion(currentQueNo);
                     resetOption();
                 }
-                break;
         }
     }
+
 
     private void resetOption(){
         ansFeedbackTv.setVisibility(View.INVISIBLE);

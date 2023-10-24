@@ -18,7 +18,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.quizpractice.R;
-import com.example.quizpractice.repository.QuestionRepository;
 import com.example.quizpractice.viewmodel.QuestionViewModel;
 
 import java.util.HashMap;
@@ -28,14 +27,14 @@ public class ResultFragment extends Fragment {
 
     private NavController navController;
     private QuestionViewModel viewModel;
-    private TextView correctAnswer, wrongAnswer , notAnswered;
+    private TextView correctAnswer , wrongAnswer , notAnswered;
     private TextView percentTv;
     private ProgressBar scoreProgressbar;
     private String quizId;
     private Button homeBtn;
 
     @Override
-    public void onCreate(@javax.annotation.Nullable Bundle savedInstanceState){
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         viewModel = new ViewModelProvider(this , ViewModelProvider.AndroidViewModelFactory
@@ -48,29 +47,34 @@ public class ResultFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_result, container, false);
     }
 
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+    @Override
+    public void onViewCreated(@NonNull  View view, @Nullable  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
         correctAnswer = view.findViewById(R.id.correctAnswerTv);
-        wrongAnswer = view.findViewById(R.id.wrongAnswerTv);
+        wrongAnswer = view.findViewById(R.id.wrongAnswersTv);
         notAnswered = view.findViewById(R.id.notAnsweredTv);
         percentTv = view.findViewById(R.id.resultPercentageTv);
-        scoreProgressbar = view.findViewById(R.id.resultCountProgressBar);
+        scoreProgressbar = view.findViewById(R.id.resultCoutProgressBar);
         homeBtn = view.findViewById(R.id.home_btn);
+
 
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navController.navigate(R.id.action_listFragment_to_detailFragment);
+                navController.navigate(R.id.action_resultFragment_to_listFragment);
             }
         });
+
         quizId = ResultFragmentArgs.fromBundle(getArguments()).getQuizId();
-        viewModel.getResults();
+
         viewModel.setQuizId(quizId);
+        viewModel.getResults();
         viewModel.getResultMutableLiveData().observe(getViewLifecycleOwner(), new Observer<HashMap<String, Long>>() {
             @Override
             public void onChanged(HashMap<String, Long> stringLongHashMap) {
+
                 Long correct = stringLongHashMap.get("correct");
                 Long wrong = stringLongHashMap.get("wrong");
                 Long noAnswer = stringLongHashMap.get("notAnswered");
@@ -79,12 +83,14 @@ public class ResultFragment extends Fragment {
                 wrongAnswer.setText(wrong.toString());
                 notAnswered.setText(noAnswer.toString());
 
-                long total = correct + wrong + noAnswer;
-                long percent = (correct*100)/total;
+                Long total = correct + wrong + noAnswer;
+                Long percent = (correct*100)/total;
 
                 percentTv.setText(String.valueOf(percent));
-                scoreProgressbar.setProgress((int) percent);
+                scoreProgressbar.setProgress(percent.intValue());
+
             }
         });
+
     }
 }
