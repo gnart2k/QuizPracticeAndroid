@@ -65,16 +65,16 @@ public class DetailFragment extends Fragment {
         ProgressBar progressBar = view.findViewById(R.id.detailProgressBar);
         navController = Navigation.findNavController(view);
         topicImage = view.findViewById(R.id.detailFragmentImage);
-        //position = DetailFragmentArgs.fromBundle(getArguments()).getPosition();
+        position = DetailFragmentArgs.fromBundle(getArguments()).getPosition();
 
         viewModel.getQuizListLiveData().observe(getViewLifecycleOwner(), new Observer<List<QuizListModel>>() {
             @Override
             public void onChanged(List<QuizListModel> quizListModels) {
-//                QuizListModel quiz = QuizListModel.get(position);
-//                difficulty.setText(quiz.getDifficulty());
-//                title.setText(quiz.getTitle());
-//                totalQuestions.setText(String.valueOf(quiz.getQuestions()));
-//                Glide.with(view).load(quiz.getImage()).into(topicImage);
+                QuizListModel quiz = quizListModels.get(position);
+                difficulty.setText(quiz.getDifficulty());
+                title.setText(quiz.getTitle());
+                totalQuestions.setText(String.valueOf(quiz.getQuestions()));
+                Glide.with(view).load(quiz.getImage()).into(topicImage);
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -82,19 +82,19 @@ public class DetailFragment extends Fragment {
 
                     }
                 },2000);
-//                totalQueCount = quiz.getQuestions();
-//                quizId = quiz.getQuizId();
+                totalQueCount = quiz.getQuestions();
+                quizId = quiz.getQuizId();
             }
         });
         startQuizBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                DetailFragmentDirections.ActionDetailFragmentToQuizFragment action =
-//                        DetailFragmentDirections.actionDetailFragmentToQuizFragment();
-//
-//                action.setQuizId(quizId);
-//                action.setTotalQueCount(totalQueCount);
-                //navController.navigate(action);
+                DetailFragmentDirections.ActionDetailFragmentToQuizragment action =
+                        DetailFragmentDirections.actionDetailFragmentToQuizragment();
+
+                action.setQuizId(quizId);
+                action.setTotalQueCount(totalQueCount);
+                navController.navigate(action);
             }
         });
     }
