@@ -95,7 +95,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         closeQuizBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_quizragment_to_listFragment);
+                navController.navigate(R.id.action_quizFragment_to_listFragment);
             }
         });
 
@@ -220,8 +220,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
 
 
         viewModel.addResults(resultMap);
-        QuizFragmentDirections.ActionQuizFragmentToResultFragment action = QuizFragmentDirections
-                .actionQuizFragmentToResultFragment();
+        QuizFragmentDirections.ActionQuizFragmentToResultFragment action = QuizFragmentDirections.actionQuizFragmentToResultFragment();
         action.setQuizId(quizId);
         navController.navigate(action);
     }

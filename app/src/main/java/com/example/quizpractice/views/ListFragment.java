@@ -75,10 +75,11 @@ public class ListFragment extends Fragment implements QuizListAdapter.OnItemCLic
     }
 
     @Override
-    public void onItemClick(int positon) {
-//        ListFragmentDirections.ActionListFragmentToDetailFragment action = ListFragmentDirections.
-//                actionListFragmentToDetailFragment();
-//        action.setPosition();
-        //navController.navigate(action);
+    public void onItemClick(int position) {
+        ListFragmentDirections.ActionListFragmentToDetailFragment action =
+                ListFragmentDirections.actionListFragmentToDetailFragment();
+        action.setPosition(position);
+        navController.navigate(action);
+
     }
 }
