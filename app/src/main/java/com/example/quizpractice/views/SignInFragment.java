@@ -59,15 +59,18 @@ public class SignInFragment extends Fragment {
                     String pass = editPass.getText().toString();
                     if (!email.isEmpty() && !pass.isEmpty()){
                         viewModel.signIn(email , pass);
-                        Toast.makeText(getContext(), "Login Successfully", Toast.LENGTH_SHORT).show();
                         viewModel.getFirebaseUserMutableLiveData().observe(getViewLifecycleOwner(), new Observer<FirebaseUser>() {
                             @Override
                             public void onChanged(FirebaseUser firebaseUser) {
                                 if (firebaseUser !=null){
                                     navController.navigate(R.id.action_signInFragment_to_listFragment);
+                                }else{
+                                    //wrong password or email
+                                    Toast.makeText(getContext(), "email or password may wrong", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
+
                     }else{
                         Toast.makeText(getContext(), "Please Enter Email and Pass", Toast.LENGTH_SHORT).show();
                     }
@@ -78,7 +81,6 @@ public class SignInFragment extends Fragment {
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-
             viewModel = new ViewModelProvider(this , ViewModelProvider.AndroidViewModelFactory
                     .getInstance(getActivity().getApplication())).get(AuthViewModel.class);
 
