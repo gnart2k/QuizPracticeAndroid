@@ -7,12 +7,17 @@ import java.lang.annotation.Documented;
 
 public class QuizListModel {
     @DocumentId
-    private String quizId, title, image, difficulty;
-    ;
-    private int questions;
+    private String quizId;
+    private String title, image, difficulty;
+    private long questions;
+
+    public QuizListModel() {
+    }
+
+
     //tao contructor va getter setter cho attribute
 
-    public QuizListModel(String quizId, String title, String image, String difficulty, int questions) {
+    public QuizListModel(String quizId, String title, String image, String difficulty, long questions) {
         this.quizId = quizId;
         this.title = title;
         this.image = image;
@@ -52,10 +57,10 @@ public class QuizListModel {
         this.difficulty = difficulty;
     }
 
-    public int getQuestions() {
+    public long getQuestions() {
         return questions;
     }
-
+//
     public void setQuestions(int questions) {
         this.questions = questions;
     }

@@ -28,6 +28,8 @@ public class SignInFragment extends Fragment {
         private EditText editEmail , editPass;
         private TextView signUpText;
         private Button signInBtn;
+
+        private boolean isLoggedIn = false;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -63,14 +65,15 @@ public class SignInFragment extends Fragment {
                             @Override
                             public void onChanged(FirebaseUser firebaseUser) {
                                 if (firebaseUser !=null){
+                                    isLoggedIn = true;
                                     navController.navigate(R.id.action_signInFragment_to_listFragment);
-                                }else{
-                                    //wrong password or email
-                                    Toast.makeText(getContext(), "email or password may wrong", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
-
+                        //wrong password or email
+                        if(!isLoggedIn){
+                            Toast.makeText(getContext(), "email or password may wrong", Toast.LENGTH_SHORT).show();
+                        }
                     }else{
                         Toast.makeText(getContext(), "Please Enter Email and Pass", Toast.LENGTH_SHORT).show();
                     }
