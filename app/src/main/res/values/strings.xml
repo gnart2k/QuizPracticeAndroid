@@ -29,4 +29,7 @@
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="logo_image">logo image</string>
+    <string name="not_registered_yet_sign_up">Not registered Yet ? Sign Up</string>
+    <string name="or">Or</string>
+    <string name="sign_in">Sign In</string>
 </resources>

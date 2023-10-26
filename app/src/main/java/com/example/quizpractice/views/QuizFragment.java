@@ -11,6 +11,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,8 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
     private  int correctAnswer = 0;
     private  int wrongAnswer = 0;
     private String answer = "";
+
+    private boolean isStopTimer = false;
 
 
     @Override
@@ -128,7 +131,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         viewModel.getQuestionMutableLiveData().observe(getViewLifecycleOwner(), new Observer<List<QuestionModel>>() {
             @Override
             public void onChanged(List<QuestionModel> questionModels) {
-                questionTv.setText(String.valueOf(currentQueNo)+ ")" +questionModels.get(i - 1).getQuestionID());
+                questionTv.setText(String.valueOf(currentQueNo)+ ") " +questionModels.get(i - 1).getQuestion());
                 option1Btn.setText(questionModels.get(i - 1).getOption_a());
                 option2Btn.setText(questionModels.get(i - 1).getOption_b());
                 option3Btn.setText(questionModels.get(i - 1).getOption_c());
@@ -145,9 +148,11 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         canAnswer = true;
     }
 
+
     private void startTimer(){
         timerCountTv.setText(String.valueOf(timer));
         progressBar.setVisibility(View.VISIBLE);
+        isStopTimer = false;
 
         countDownTimer = new CountDownTimer(timer * 1000 , 1000) {
             @Override
@@ -157,6 +162,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
 
                 Long percent = millisUntilFinished/(timer*10);
                 progressBar.setProgress(percent.intValue());
+                if(isStopTimer) cancel();
             }
 
             @Override
@@ -185,13 +191,12 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         int selectedId = v.getId();
         if(selectedId == R.id.option1Btn) {
             verifyAnswer(option1Btn);
-        }else if(selectedId == R.id.option1Btn) {
-            verifyAnswer(option1Btn);
         }else if(selectedId == R.id.option2Btn) {
             verifyAnswer(option2Btn);
         }else if(selectedId == R.id.option3Btn) {
             verifyAnswer(option3Btn);
         }else if(selectedId ==R.id.nextQueBtn){
+                isStopTimer = true;
                 if (currentQueNo == totalQuestion){
                     submitResults();
                 }else{
@@ -218,8 +223,8 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         resultMap.put("wrong", wrongAnswer);
         resultMap.put("notAnswered", notAnswer);
 
-
         viewModel.addResults(resultMap);
+        Log.d("result map", resultMap.toString());
         QuizFragmentDirections.ActionQuizFragmentToResultFragment action = QuizFragmentDirections.actionQuizFragmentToResultFragment();
         action.setQuizId(quizId);
         navController.navigate(action);
@@ -237,8 +242,10 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
                 ansFeedbackTv.setText("Wrong answer \nCorrect Answer : " + answer);
             }
         }
+//        countDownTimer.cancel();
+        isStopTimer = true;
+        Log.d("timer", "");
         canAnswer = false;
-        countDownTimer.cancel();
         showNextBtn();
     }
 }

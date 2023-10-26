@@ -98,8 +98,6 @@
             android:name="quizId"
             app:argType="string"
             android:defaultValue="null" />
-
-
     </fragment>
 
 

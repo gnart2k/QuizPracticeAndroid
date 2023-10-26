@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +75,8 @@ public class ResultFragment extends Fragment {
         viewModel.getResultMutableLiveData().observe(getViewLifecycleOwner(), new Observer<HashMap<String, Long>>() {
             @Override
             public void onChanged(HashMap<String, Long> stringLongHashMap) {
-
+                if(stringLongHashMap == null){}
+                else{
                 Long correct = stringLongHashMap.get("correct");
                 Long wrong = stringLongHashMap.get("wrong");
                 Long noAnswer = stringLongHashMap.get("notAnswered");
@@ -88,6 +90,7 @@ public class ResultFragment extends Fragment {
 
                 percentTv.setText(String.valueOf(percent));
                 scoreProgressbar.setProgress(percent.intValue());
+                }
 
             }
         });

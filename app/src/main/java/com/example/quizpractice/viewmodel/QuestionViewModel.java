@@ -42,10 +42,8 @@ public class QuestionViewModel extends ViewModel implements QuestionRepository.O
         questionMutableLiveData.setValue(questionModels);
     }
 
-    public  void setQuizId(String quizId){
+    public void setQuizId(String quizId){
         repository.setQuizID(quizId);
-        //repository.getQuestions();
-
     }
 
     public void getQuestion(){
