@@ -33,4 +33,7 @@
     <string name="or">Or</string>
     <string name="sign_in">Sign In</string>
     <string name="add_quiz">Add Quiz</string>
+    <string name="difficulity">Difficulity</string>
+    <string name="title">Title</string>
+    <string name="number_of_questions">Number of questions</string>
 </resources>

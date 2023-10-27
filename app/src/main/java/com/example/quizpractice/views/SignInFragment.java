@@ -84,12 +84,13 @@ public class SignInFragment extends Fragment {
                                     isLoggedIn = true;
                                     navController.navigate(R.id.action_signInFragment_to_listFragment);
                                 }
+                                //wrong password or email
+                                if(!isLoggedIn){
+                                Toast.makeText(getContext(), "email or password may wrong", Toast.LENGTH_SHORT).show();
+                            }
                             }
                         });
-                        //wrong password or email
-                        if(!isLoggedIn){
-                            Toast.makeText(getContext(), "email or password may wrong", Toast.LENGTH_SHORT).show();
-                        }
+
                     }else{
                         Toast.makeText(getContext(), "Please Enter Email and Pass", Toast.LENGTH_SHORT).show();
                     }
