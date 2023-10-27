@@ -33,7 +33,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
     private QuestionViewModel viewModel;
     private NavController navController;
     private ProgressBar progressBar;
-    private Button option1Btn, option2Btn, option3Btn, nextQueBtn;
+    private Button option1Btn, option2Btn, option3Btn, nextQueBtn, addQuizBtn;
     private TextView questionTv, ansFeedbackTv, questionNumberTv, timerCountTv;
     private ImageView closeQuizBtn;
     private String quizId;
@@ -46,6 +46,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
     private  int correctAnswer = 0;
     private  int wrongAnswer = 0;
     private String answer = "";
+
 
     private boolean isStopTimer = false;
 
@@ -94,7 +95,6 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         option2Btn.setOnClickListener(this);
         option3Btn.setOnClickListener(this);
         nextQueBtn.setOnClickListener(this);
-
         closeQuizBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -227,8 +227,12 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         Log.d("result map", resultMap.toString());
         QuizFragmentDirections.ActionQuizFragmentToResultFragment action = QuizFragmentDirections.actionQuizFragmentToResultFragment();
         action.setQuizId(quizId);
+        action.setCorrectAnswer(correctAnswer);
+        action.setNotAnswer(notAnswer);
+        action.setNotCorrectAnswer(notAnswer);
         navController.navigate(action);
     }
+
 
     private void verifyAnswer(Button button){
         if( canAnswer){

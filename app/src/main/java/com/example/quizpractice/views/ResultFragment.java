@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -32,7 +33,10 @@ public class ResultFragment extends Fragment {
     private TextView percentTv;
     private ProgressBar scoreProgressbar;
     private String quizId;
+
+    private long correctResult, incorrectResult, notAnsweredResult;
     private Button homeBtn;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,31 +73,21 @@ public class ResultFragment extends Fragment {
         });
 
         quizId = ResultFragmentArgs.fromBundle(getArguments()).getQuizId();
+        correctResult = ResultFragmentArgs.fromBundle(getArguments()).getCorrectAnswer();
+        incorrectResult = ResultFragmentArgs.fromBundle(getArguments()).getNotCorrectAnswer();
+        notAnsweredResult = ResultFragmentArgs.fromBundle(getArguments()).getNotAnswer();
 
         viewModel.setQuizId(quizId);
         viewModel.getResults();
-        viewModel.getResultMutableLiveData().observe(getViewLifecycleOwner(), new Observer<HashMap<String, Long>>() {
-            @Override
-            public void onChanged(HashMap<String, Long> stringLongHashMap) {
-                if(stringLongHashMap == null){}
-                else{
-                Long correct = stringLongHashMap.get("correct");
-                Long wrong = stringLongHashMap.get("wrong");
-                Long noAnswer = stringLongHashMap.get("notAnswered");
 
-                correctAnswer.setText(correct.toString());
-                wrongAnswer.setText(wrong.toString());
-                notAnswered.setText(noAnswer.toString());
+        correctAnswer.setText((int) correctResult);
+        wrongAnswer.setText((int) incorrectResult);
+        notAnswered.setText((int) notAnsweredResult);
 
-                Long total = correct + wrong + noAnswer;
-                Long percent = (correct*100)/total;
+        Long total = correctResult + incorrectResult + notAnsweredResult;
+        Long percent = (correctResult * 100) / total;
 
-                percentTv.setText(String.valueOf(percent));
-                scoreProgressbar.setProgress(percent.intValue());
-                }
-
-            }
-        });
-
+        percentTv.setText(String.valueOf(percent));
+        scoreProgressbar.setProgress(percent.intValue());
     }
 }

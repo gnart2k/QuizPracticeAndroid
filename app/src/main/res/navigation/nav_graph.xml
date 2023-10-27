@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@+id/splashFragment">
     <fragment
-        android:id="@+id/splashFragment"
+        android:id="@id/splashFragment"
         android:name="com.example.quizpractice.views.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
@@ -48,6 +48,20 @@
         <action
             android:id="@+id/action_listFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_addQuizFragment"
+            app:destination="@id/addQuizFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addQuizFragment"
+        android:name="com.example.quizpractice.views.AddQuizFragment"
+        android:label="fragment_add_quiz"
+        tools:layout="@layout/fragment_add_quiz" >
+        <action
+            android:id="@+id/addQuizFragment_to_ListFragment"
+            app:destination="@id/listFragment"
+            />
     </fragment>
 
 
@@ -80,7 +94,6 @@
             android:name="quizId"
             app:argType="string"
             android:defaultValue="null"/>
-
         <argument
             android:name="totalQueCount"
             app:argType="long"
@@ -97,7 +110,20 @@
         <argument
             android:name="quizId"
             app:argType="string"
-            android:defaultValue="null" />
+            android:defaultValue="null"
+            />
+        <argument
+            android:name="correctAnswer"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <argument
+            android:name="notAnswer"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <argument
+            android:name="notCorrectAnswer"
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
 
 
