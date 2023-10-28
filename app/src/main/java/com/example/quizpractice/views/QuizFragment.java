@@ -24,6 +24,7 @@ import com.example.quizpractice.Model.QuestionModel;
 import com.example.quizpractice.R;
 import com.example.quizpractice.viewmodel.QuestionViewModel;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -221,7 +222,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         resultMap.put("correct", correctAnswer);
         resultMap.put("wrong", wrongAnswer);
         resultMap.put("notAnswered", notAnswer);
-
+        resultMap.put("time", new Date());
         viewModel.addResults(resultMap);
         Log.d("result map", resultMap.toString());
         QuizFragmentDirections.ActionQuizFragmentToResultFragment action = QuizFragmentDirections.actionQuizFragmentToResultFragment();

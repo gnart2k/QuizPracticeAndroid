@@ -9,6 +9,7 @@ import com.example.quizpractice.Model.QuestionModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -26,7 +27,7 @@ public class  QuestionRepository {
     private String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private OnResultLoad onResultLoad;
 
-    public  void getResults(){
+    public void getResults(){
         firebaseFirestore.collection("Quiz").document(quizID)
                 .collection("results").document(currentUserId)
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -45,11 +46,10 @@ public class  QuestionRepository {
 
     }
     public void addResults(HashMap<String , Object> resultMap){
-        firebaseFirestore.collection("Quiz").document(quizID)
-                .collection("results").document(currentUserId)
-                .set(resultMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        firebaseFirestore.collection("results").document(currentUserId).collection("history")
+                .add(resultMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
                         if(task.isSuccessful()){
                             onResultAdded.onSubmit();
                         }else{

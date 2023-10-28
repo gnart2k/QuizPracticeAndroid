@@ -10,6 +10,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class QuizListDatabase {
@@ -30,6 +31,10 @@ public class QuizListDatabase {
                 }
             }
         });
+    }
+
+    public void addQuiz(Object data){
+        firebaseFirestore.collection("Quiz").add(data);
     }
     public interface onFirestoneTaskComplete{
         void quizLoad (List<QuizListModel> quizListModels);
