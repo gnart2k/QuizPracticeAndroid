@@ -80,9 +80,9 @@ public class ResultFragment extends Fragment {
         viewModel.setQuizId(quizId);
         viewModel.getResults();
 
-        correctAnswer.setText((int) correctResult);
-        wrongAnswer.setText((int) incorrectResult);
-        notAnswered.setText((int) notAnsweredResult);
+        correctAnswer.setText(String.valueOf(correctResult));
+        wrongAnswer.setText(String.valueOf(incorrectResult));
+        notAnswered.setText(String.valueOf(notAnsweredResult));
 
         Long total = correctResult + incorrectResult + notAnsweredResult;
         Long percent = (correctResult * 100) / total;
