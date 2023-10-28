@@ -78,7 +78,6 @@ public class ResultFragment extends Fragment {
         notAnsweredResult = ResultFragmentArgs.fromBundle(getArguments()).getNotAnswer();
 
         viewModel.setQuizId(quizId);
-        viewModel.getResults();
 
         correctAnswer.setText(String.valueOf(correctResult));
         wrongAnswer.setText(String.valueOf(incorrectResult));

@@ -58,7 +58,7 @@ public class DetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        title = view.findViewById(R.id.detailFragmentDifficulty);
+        title = view.findViewById(R.id.detailFragmentTitle);
         difficulty = view.findViewById(R.id.detailFragmentDifficulty);
         totalQuestions = view.findViewById(R.id.detailFragmentQuestions);
         startQuizBtn = view.findViewById(R.id.startQuizBtn);
@@ -75,13 +75,6 @@ public class DetailFragment extends Fragment {
                 title.setText(quiz.getTitle());
                 totalQuestions.setText(String.valueOf(quiz.getQuestions()));
                 Glide.with(view).load(quiz.getImage()).into(topicImage);
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                    }
-                },2000);
                 totalQueCount = quiz.getQuestions();
                 quizId = quiz.getQuizId();
             }
@@ -91,11 +84,11 @@ public class DetailFragment extends Fragment {
             public void onClick(View v) {
                 DetailFragmentDirections.ActionDetailFragmentToQuizragment action =
                         DetailFragmentDirections.actionDetailFragmentToQuizragment();
-
                 action.setQuizId(quizId);
                 action.setTotalQueCount(totalQueCount);
                 navController.navigate(action);
             }
         });
+
     }
 }

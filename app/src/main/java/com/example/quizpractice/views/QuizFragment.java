@@ -33,7 +33,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
     private QuestionViewModel viewModel;
     private NavController navController;
     private ProgressBar progressBar;
-    private Button option1Btn, option2Btn, option3Btn, nextQueBtn, addQuizBtn;
+    private Button option1Btn, option2Btn, option3Btn, nextQueBtn;
     private TextView questionTv, ansFeedbackTv, questionNumberTv, timerCountTv;
     private ImageView closeQuizBtn;
     private String quizId;
@@ -131,7 +131,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         viewModel.getQuestionMutableLiveData().observe(getViewLifecycleOwner(), new Observer<List<QuestionModel>>() {
             @Override
             public void onChanged(List<QuestionModel> questionModels) {
-                questionTv.setText(String.valueOf(currentQueNo)+ ") " +questionModels.get(i - 1).getQuestion());
+                questionTv.setText(currentQueNo+ ") " +questionModels.get(i - 1).getQuestion());
                 option1Btn.setText(questionModels.get(i - 1).getOption_a());
                 option2Btn.setText(questionModels.get(i - 1).getOption_b());
                 option3Btn.setText(questionModels.get(i - 1).getOption_c());
@@ -144,7 +144,6 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        startTimer();
         canAnswer = true;
     }
 
@@ -176,6 +175,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
     }
 
     private void showNextBtn() {
+        ansFeedbackTv.setVisibility(View.VISIBLE);
         if (currentQueNo == totalQuestion){
             nextQueBtn.setText("Submit");
             nextQueBtn.setEnabled(true);
@@ -183,7 +183,6 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         }else {
             nextQueBtn.setVisibility(View.VISIBLE);
             nextQueBtn.setEnabled(true);
-            ansFeedbackTv.setVisibility(View.VISIBLE);
         }
     }
     @Override
@@ -229,7 +228,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         action.setQuizId(quizId);
         action.setCorrectAnswer(correctAnswer);
         action.setNotAnswer(notAnswer);
-        action.setNotCorrectAnswer(notAnswer);
+        action.setNotCorrectAnswer(wrongAnswer);
         navController.navigate(action);
     }
 
@@ -243,12 +242,12 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
             }else{
                 button.setBackground(ContextCompat.getDrawable(getContext(), R.color.red));
                 wrongAnswer++;
+                Log.d("wrongAnswer", wrongAnswer + "");
                 ansFeedbackTv.setText("Wrong answer \nCorrect Answer : " + answer);
             }
         }
 //        countDownTimer.cancel();
         isStopTimer = true;
-        Log.d("timer", "");
         canAnswer = false;
         showNextBtn();
     }
