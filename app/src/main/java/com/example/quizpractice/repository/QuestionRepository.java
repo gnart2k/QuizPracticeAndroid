@@ -1,16 +1,13 @@
 package com.example.quizpractice.repository;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.quizpractice.Model.QuestionModel;
+import com.example.quizpractice.Model.ResultModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -29,21 +26,16 @@ public class  QuestionRepository {
 
     public void getResults(){
         firebaseFirestore.collection("Quiz").document(quizID)
-                .collection("results").document(currentUserId)
-                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                .collection("questions").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
-                            resultMap.put("correct", task.getResult().getLong("correct"));
-                            resultMap.put("wrong", task.getResult().getLong("wrong"));
-                            resultMap.put("notAnswered", task.getResult().getLong("notAnswered"));
-                            onResultLoad.onResultLoad(resultMap);
+                            onResultLoad.onLoad(task.getResult().toObjects(ResultModel.class));
                         }else{
-                            onResultLoad.onError(task.getException());
+                            onQuestionLoad.onError(task.getException());
                         }
                     }
                 });
-
     }
     public void addResults(HashMap<String , Object> resultMap){
         firebaseFirestore.collection("results").document(currentUserId).collection("history")
@@ -62,13 +54,10 @@ public class  QuestionRepository {
         this.quizID = quizID;
     }
 
-    public QuestionRepository(OnQuestionLoad onQuestionLoad, OnResultAdded onResultAdded,
-                              OnResultLoad onResultLoad) {
+    public QuestionRepository(OnQuestionLoad onQuestionLoad, OnResultAdded onResultAdded) {
         firebaseFirestore = FirebaseFirestore.getInstance();
         this.onQuestionLoad = onQuestionLoad;
         this.onResultAdded = onResultAdded;
-        this.onResultLoad = onResultLoad;
-
     }
 
     public void getQuestions(){
@@ -86,7 +75,7 @@ public class  QuestionRepository {
     }
 
     public interface OnResultLoad{
-        void onResultLoad(HashMap<String , Long> resultMap);
+        void onLoad(List<ResultModel> resultModels);
         void onError(Exception e);
 
     }
@@ -94,6 +83,8 @@ public class  QuestionRepository {
         void onLoad(List<QuestionModel> questionModels);
         void onError(Exception e);
     }
+
+
     public interface OnResultAdded{
         boolean onSubmit();
         void onError(Exception e);

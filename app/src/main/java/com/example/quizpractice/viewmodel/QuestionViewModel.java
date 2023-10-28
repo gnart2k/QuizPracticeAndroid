@@ -11,7 +11,7 @@ import com.example.quizpractice.repository.QuestionRepository;
 import java.util.HashMap;
 import java.util.List;
 
-public class QuestionViewModel extends ViewModel implements QuestionRepository.OnQuestionLoad, QuestionRepository.OnResultAdded, QuestionRepository.OnResultLoad {
+public class QuestionViewModel extends ViewModel implements QuestionRepository.OnQuestionLoad, QuestionRepository.OnResultAdded{
 
 
     private MutableLiveData<List<QuestionModel>> questionMutableLiveData;
@@ -32,7 +32,7 @@ public class QuestionViewModel extends ViewModel implements QuestionRepository.O
 
     public QuestionViewModel(){
         questionMutableLiveData = new MutableLiveData<>();
-        repository = new QuestionRepository(this, this, this);
+        repository = new QuestionRepository(this, this);
     }
     public void addResults(HashMap<String , Object> resultMap){
         repository.addResults(resultMap);
@@ -50,14 +50,10 @@ public class QuestionViewModel extends ViewModel implements QuestionRepository.O
         repository.getQuestions();
     }
 
+
     @Override
     public boolean onSubmit() {
         return true;
-    }
-
-    @Override
-    public void onResultLoad(HashMap<String, Long> resultMap) {
-        resultMutableLiveData.setValue(resultMap);
     }
 
     @Override
