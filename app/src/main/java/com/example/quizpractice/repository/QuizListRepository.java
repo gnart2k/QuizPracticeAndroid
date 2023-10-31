@@ -5,19 +5,17 @@ import androidx.annotation.NonNull;
 import com.example.quizpractice.Model.QuizListModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.HashMap;
 import java.util.List;
 
-public class QuizListDatabase {
+public class QuizListRepository {
     private onFirestoneTaskComplete onFirestoneTaskComplete;
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     private CollectionReference reference = firebaseFirestore.collection("Quiz");
-    public QuizListDatabase(onFirestoneTaskComplete onFirestoneTaskComplete){
+    public QuizListRepository(onFirestoneTaskComplete onFirestoneTaskComplete){
         this.onFirestoneTaskComplete = onFirestoneTaskComplete;
     }
     public void getQuizFromFirebase(){

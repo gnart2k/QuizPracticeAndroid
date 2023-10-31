@@ -25,14 +25,14 @@ public class  QuestionRepository {
     private OnResultLoad onResultLoad;
 
     public void getResults(){
-        firebaseFirestore.collection("Quiz").document(quizID)
-                .collection("questions").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firebaseFirestore.collection("results").document(currentUserId).collection("history")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             onResultLoad.onLoad(task.getResult().toObjects(ResultModel.class));
                         }else{
-                            onQuestionLoad.onError(task.getException());
+                            onResultLoad.onError(task.getException());
                         }
                     }
                 });

@@ -6,13 +6,13 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.quizpractice.Model.QuizListModel;
-import com.example.quizpractice.repository.QuizListDatabase;
+import com.example.quizpractice.repository.QuizListRepository;
 
 import java.util.List;
 
-public class QuizListViewModel extends ViewModel implements QuizListDatabase.onFirestoneTaskComplete {
+public class QuizListViewModel extends ViewModel implements QuizListRepository.onFirestoneTaskComplete {
     private MutableLiveData<List<QuizListModel>> quizListLiveData = new MutableLiveData<>();
-    private QuizListDatabase database =new QuizListDatabase(this);
+    private QuizListRepository database =new QuizListRepository(this);
 
     public MutableLiveData<List<QuizListModel>> getQuizListLiveData() {
         return quizListLiveData;
@@ -22,11 +22,11 @@ public class QuizListViewModel extends ViewModel implements QuizListDatabase.onF
         this.quizListLiveData = quizListMutableLiveData;
     }
 
-    public QuizListDatabase getDatabase() {
+    public QuizListRepository getDatabase() {
         return database;
     }
 
-    public void setDatabase(QuizListDatabase database) {
+    public void setDatabase(QuizListRepository database) {
         this.database = database;
     }
 

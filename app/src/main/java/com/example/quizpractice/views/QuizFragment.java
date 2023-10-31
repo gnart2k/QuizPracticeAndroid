@@ -38,6 +38,9 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
     private TextView questionTv, ansFeedbackTv, questionNumberTv, timerCountTv;
     private ImageView closeQuizBtn;
     private String quizId;
+
+    private String quizTitle;
+
     private long totalQuestion;
     private int currentQueNo = 0;
     private boolean canAnswer = false;
@@ -89,6 +92,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
 
         quizId = QuizFragmentArgs.fromBundle(getArguments()).getQuizId();
         totalQuestion = QuizFragmentArgs.fromBundle(getArguments()).getTotalQueCount();
+        quizTitle  =  QuizFragmentArgs.fromBundle(getArguments()).getQuizTitle();
         viewModel.setQuizId(quizId);
         viewModel.getQuestion();
 
@@ -222,6 +226,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         resultMap.put("correct", correctAnswer);
         resultMap.put("wrong", wrongAnswer);
         resultMap.put("notAnswered", notAnswer);
+        resultMap.put("quizTitle", quizTitle);
         resultMap.put("time", new Date());
         viewModel.addResults(resultMap);
         Log.d("result map", resultMap.toString());

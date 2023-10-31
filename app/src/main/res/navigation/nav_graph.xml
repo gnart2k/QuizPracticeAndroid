@@ -77,6 +77,7 @@
             android:name="position"
             app:argType="integer"
             android:defaultValue="0" />
+
     </fragment>
 
     <fragment
@@ -97,7 +98,11 @@
         <argument
             android:name="totalQueCount"
             app:argType="long"
-            android:defaultValue="0L" />
+            android:defaultValue="0L"/>
+        <argument
+            android:name="quizTitle"
+            app:argType="string"
+            android:defaultValue="" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"

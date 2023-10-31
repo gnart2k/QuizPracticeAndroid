@@ -37,6 +37,8 @@ public class DetailFragment extends Fragment {
     private QuizListViewModel viewModel;
     private ImageView topicImage;
     private String quizId;
+    private String quizTitle;
+
     private long totalQueCount;
 
 
@@ -73,6 +75,7 @@ public class DetailFragment extends Fragment {
                 QuizListModel quiz = quizListModels.get(position);
                 difficulty.setText(quiz.getDifficulty());
                 title.setText(quiz.getTitle());
+                quizTitle = quiz.getTitle();
                 totalQuestions.setText(String.valueOf(quiz.getQuestions()));
                 Glide.with(view).load(quiz.getImage()).into(topicImage);
                 totalQueCount = quiz.getQuestions();
@@ -86,6 +89,7 @@ public class DetailFragment extends Fragment {
                         DetailFragmentDirections.actionDetailFragmentToQuizragment();
                 action.setQuizId(quizId);
                 action.setTotalQueCount(totalQueCount);
+                action.setQuizTitle(quizTitle);
                 navController.navigate(action);
             }
         });
