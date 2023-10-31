@@ -51,6 +51,17 @@
         <action
             android:id="@+id/action_listFragment_to_addQuizFragment"
             app:destination="@id/addQuizFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.quizpractice.views.QuizHistoryFragment"
+        android:label="quizHistoryFragment"
+        tools:layout="@layout/fragment_quiz_history" >
+
     </fragment>
 
     <fragment
