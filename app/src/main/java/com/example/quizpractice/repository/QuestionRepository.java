@@ -24,19 +24,7 @@ public class  QuestionRepository {
     private String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private OnResultLoad onResultLoad;
 
-    public void getResults(){
-        firebaseFirestore.collection("results").document(currentUserId).collection("history")
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            onResultLoad.onLoad(task.getResult().toObjects(ResultModel.class));
-                        }else{
-                            onResultLoad.onError(task.getException());
-                        }
-                    }
-                });
-    }
+
     public void addResults(HashMap<String , Object> resultMap){
         firebaseFirestore.collection("results").document(currentUserId).collection("history")
                 .add(resultMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {

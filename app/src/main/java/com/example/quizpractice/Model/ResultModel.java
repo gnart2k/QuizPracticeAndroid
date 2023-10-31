@@ -5,6 +5,18 @@ import com.google.firebase.firestore.DocumentId;
 import java.util.Date;
 
 public class ResultModel {
+    @Override
+    public String toString() {
+        return "ResultModel{" +
+                "resultId='" + resultId + '\'' +
+                ", quizTitle='" + quizTitle + '\'' +
+                ", correct=" + correct +
+                ", notAnswer=" + notAnswer +
+                ", wrong=" + wrong +
+                ", date=" + date +
+                '}';
+    }
+
     @DocumentId
     private String resultId;
     private String quizTitle;

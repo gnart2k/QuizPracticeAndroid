@@ -17,14 +17,11 @@ public class QuestionViewModel extends ViewModel implements QuestionRepository.O
 
     private MutableLiveData<List<QuestionModel>> questionMutableLiveData;
     private QuestionRepository repository;
-    private MutableLiveData<List<ResultModel>> resultMutableLiveData;
+    private MutableLiveData<List<ResultModel>> resultMutableLiveData = new MutableLiveData<>();
 
     public MutableLiveData<List<ResultModel>> getResultMutableLiveData() {
+        Log.d("result data", resultMutableLiveData.toString());
         return resultMutableLiveData;
-    }
-
-    public void getResults(){
-        repository.getResults();
     }
 
     public MutableLiveData<List<QuestionModel>> getQuestionMutableLiveData() {

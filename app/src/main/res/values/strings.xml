@@ -36,4 +36,5 @@
     <string name="difficulity">Difficulity</string>
     <string name="title">Title</string>
     <string name="number_of_questions">Number of questions</string>
+    <string name="retype_password">Retype password</string>
 </resources>

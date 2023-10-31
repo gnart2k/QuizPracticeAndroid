@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.example.quizpractice.Adapter.QuizListAdapter;
 import com.example.quizpractice.Model.QuizListModel;
 import com.example.quizpractice.Model.ResultModel;
 import com.example.quizpractice.R;
+import com.example.quizpractice.viewmodel.HistoryViewModel;
 import com.example.quizpractice.viewmodel.QuestionViewModel;
 import com.example.quizpractice.viewmodel.QuizListViewModel;
 
@@ -37,8 +39,10 @@ import java.util.List;
 public class QuizHistoryFragment extends Fragment implements HistoryListAdapter.OnItemCLickedListener {
     private RecyclerView recyclerView;
     private NavController navController;
-    private QuestionViewModel viewModel;
+    private HistoryViewModel viewModel;
     private HistoryListAdapter adapter;
+    private ProgressBar progressBar;
+    final Handler handler = new Handler();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,16 +54,17 @@ public class QuizHistoryFragment extends Fragment implements HistoryListAdapter.
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         viewModel = new ViewModelProvider(this , ViewModelProvider.AndroidViewModelFactory
-                .getInstance(getActivity().getApplication())).get(QuestionViewModel.class);
+                .getInstance(getActivity().getApplication())).get(HistoryViewModel.class);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        progressBar = view.findViewById(R.id.quizHistoryProgressBar);
+
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = view.findViewById(R.id.listQuizRecyclerview);
+        recyclerView = view.findViewById(R.id.historyRecyclerView);
         navController = Navigation.findNavController(view);
 
         recyclerView.setHasFixedSize(true);
@@ -69,22 +74,33 @@ public class QuizHistoryFragment extends Fragment implements HistoryListAdapter.
 
         recyclerView.setAdapter(adapter);
 
-        viewModel.getResultMutableLiveData().observe(getViewLifecycleOwner(), new Observer<List<ResultModel>>() {
+        handler.postDelayed(new Runnable() {
             @Override
-            public void onChanged(List<ResultModel> resultModels) {
-                adapter.setResultListModels(resultModels);
-                adapter.notifyDataSetChanged();
+            public void run() {
+                viewModel.getResultLiveData().observe(getViewLifecycleOwner(), new Observer<List<ResultModel>>() {
+                    @Override
+                    public void onChanged(List<ResultModel> resultModels) {
+                        Log.d("check", String.valueOf(resultModels.size() == 2));
+                        if (resultModels.isEmpty()) {
+                            viewModel.reloadData();
+                        }else{
+                            progressBar.setVisibility(View.GONE);
+                            adapter.setResultModels(resultModels);
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                });
             }
-        });
+        }, 3000);
 
 
     }
 
     @Override
     public void onItemClick(int position) {
-        ListFragmentDirections.ActionListFragmentToDetailFragment action =
-                ListFragmentDirections.actionListFragmentToDetailFragment();
-        action.setPosition(position);
-        navController.navigate(action);
+//        ListFragmentDirections.ActionListFragmentToDetailFragment action =
+//                ListFragmentDirections.actionListFragmentToDetailFragment();
+//        action.setPosition(position);
+//        navController.navigate(action);
     }
 }

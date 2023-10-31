@@ -3,6 +3,7 @@ package com.example.quizpractice.repository;
 import androidx.annotation.NonNull;
 
 import com.example.quizpractice.Model.QuizListModel;
+import com.example.quizpractice.Model.ResultModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -36,6 +37,7 @@ public class QuizListRepository {
     }
     public interface onFirestoneTaskComplete{
         void quizLoad (List<QuizListModel> quizListModels);
+
         void onError(Exception e );
     }
 

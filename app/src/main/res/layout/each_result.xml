@@ -12,7 +12,7 @@
         android:orientation="vertical">
       
         <TextView
-            android:id="@+id/quizTitle"
+            android:id="@+id/quizTitleEachResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
@@ -23,7 +23,7 @@
             android:background="@color/black"/>
 
         <TextView
-            android:id="@+id/correctTv"
+            android:id="@+id/correctEachResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
@@ -34,7 +34,7 @@
             android:background="@color/black"/>
 
         <TextView
-            android:id="@+id/wrongTv"
+            android:id="@+id/wrongEachResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
@@ -56,7 +56,7 @@
             android:background="@color/black"/>
 
         <TextView
-            android:id="@+id/timeTv"
+            android:id="@+id/noAnswerEachResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
@@ -67,7 +67,7 @@
             android:background="@color/black"/>
 
         <TextView
-            android:id="@+id/scoreTv"
+            android:id="@+id/scoreEachResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />

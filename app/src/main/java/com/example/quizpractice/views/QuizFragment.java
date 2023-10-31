@@ -226,7 +226,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         HashMap<String, Object> resultMap = new HashMap<>();
         resultMap.put("correct", correctAnswer);
         resultMap.put("wrong", wrongAnswer);
-        resultMap.put("notAnswered", notAnswer);
+        resultMap.put("notAnswer", notAnswer);
         resultMap.put("quizTitle", quizTitle);
         resultMap.put("time", new Date());
         viewModel.addResults(resultMap);
