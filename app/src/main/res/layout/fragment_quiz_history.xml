@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.QuizHistory">
+
+
+    <TextView
+        android:id="@+id/historyTv"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="20dp"
+        android:text="History"
+        android:textColor="#00BCD4"
+        android:textColorLink="#03A9F4"
+        android:textSize="34sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="630dp"
+        android:layout_marginTop="100dp" />
+
+</FrameLayout>

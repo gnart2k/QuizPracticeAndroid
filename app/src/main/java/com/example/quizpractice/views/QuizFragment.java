@@ -200,14 +200,14 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         }else if(selectedId == R.id.option3Btn) {
             verifyAnswer(option3Btn);
         }else if(selectedId ==R.id.nextQueBtn){
-                isStopTimer = true;
-                if (currentQueNo == totalQuestion){
-                    submitResults();
-                }else{
-                    currentQueNo ++;
-                    loadQuestion(currentQueNo);
-                    resetOption();
-                }
+            isStopTimer = true;
+            if (currentQueNo == totalQuestion){
+                submitResults();
+            }else{
+                currentQueNo ++;
+                loadQuestion(currentQueNo);
+                resetOption();
+            }
         }
     }
 
