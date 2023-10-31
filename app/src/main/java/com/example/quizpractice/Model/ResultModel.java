@@ -7,6 +7,7 @@ import java.util.Date;
 public class ResultModel {
     @DocumentId
     private String resultId;
+    private String quizTitle;
     private long correct;
     private long notAnswer;
     private long wrong;
@@ -14,6 +15,15 @@ public class ResultModel {
 
 
     public ResultModel(long correct, long notAnswer, long wrong, Date date) {
+        this.correct = correct;
+        this.notAnswer = notAnswer;
+        this.wrong = wrong;
+        this.date = date;
+    }
+
+    public ResultModel(String resultId, String quizTitle, long correct, long notAnswer, long wrong, Date date) {
+        this.resultId = resultId;
+        this.quizTitle = quizTitle;
         this.correct = correct;
         this.notAnswer = notAnswer;
         this.wrong = wrong;
@@ -29,6 +39,14 @@ public class ResultModel {
 
     public void setResultId(String resultId) {
         this.resultId = resultId;
+    }
+
+    public String getQuizTitle() {
+        return quizTitle;
+    }
+
+    public void setQuizTitle(String quizTitle) {
+        this.quizTitle = quizTitle;
     }
 
     public long getCorrect() {

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.quizpractice.Model.QuestionModel;
+import com.example.quizpractice.Model.ResultModel;
 import com.example.quizpractice.repository.QuestionRepository;
 
 import java.util.HashMap;
@@ -16,9 +17,9 @@ public class QuestionViewModel extends ViewModel implements QuestionRepository.O
 
     private MutableLiveData<List<QuestionModel>> questionMutableLiveData;
     private QuestionRepository repository;
-    private MutableLiveData<HashMap<String , Long>> resultMutableLiveData;
+    private MutableLiveData<List<ResultModel>> resultMutableLiveData;
 
-    public MutableLiveData<HashMap<String, Long>> getResultMutableLiveData() {
+    public MutableLiveData<List<ResultModel>> getResultMutableLiveData() {
         return resultMutableLiveData;
     }
 

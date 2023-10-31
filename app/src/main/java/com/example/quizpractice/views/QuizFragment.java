@@ -221,6 +221,7 @@ public class QuizFragment extends Fragment implements View.OnClickListener {
         option3Btn.setBackground(ContextCompat.getDrawable(getContext(), R.color.light_sky));
     }
 
+
     private void submitResults() {
         HashMap<String, Object> resultMap = new HashMap<>();
         resultMap.put("correct", correctAnswer);
