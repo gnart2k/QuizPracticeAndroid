@@ -73,6 +73,34 @@
             android:id="@+id/addQuizFragment_to_ListFragment"
             app:destination="@id/listFragment"
             />
+        <action
+            android:id="@+id/addQuizFragment_to_AddQuestionFragment"
+            app:destination="@id/addQuestionFragment"
+            />
+
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="difficulty"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="numberOfQuestion"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addQuestionFragment"
+        android:name="com.example.quizpractice.views.AddQuestionFragment"
+        android:label="fragment_add_question"
+        tools:layout="@layout/fragment_add_question" >
+        <action
+            android:id="@+id/addQuestionFragment_to_ListFragment"
+            app:destination="@id/listFragment"
+            />
     </fragment>
 
 
