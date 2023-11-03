@@ -39,7 +39,6 @@ public class AddQuizFragment extends Fragment {
     public AddQuizFragment() {
         // Required empty public constructor
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +57,7 @@ public class AddQuizFragment extends Fragment {
         titleView = view.findViewById(R.id.quizTitleAddQuiz);
         difficultyView = view.findViewById(R.id.quizDifficulityAddQuiz);
         questionNumberView = view.findViewById(R.id.numberOfQuestionsAddQuiz);
+        nextBtn = view.findViewById(R.id.nextToCreateQuyestionAddQuiz);
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +66,7 @@ public class AddQuizFragment extends Fragment {
                 bundle.putString("title", titleView.getText().toString());
                 bundle.putString("difficulty", difficultyView.getText().toString());
                 bundle.putString("questionNumber", questionNumberView.getText().toString());
-                navController.navigate(R.id.addQuestionFragment, bundle);
+                Navigation.findNavController(view).navigate(R.id.addQuestionFragment, bundle);
             }
         });
 
