@@ -10,6 +10,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/eachQuestionLayout"
         app:cardCornerRadius="6dp"
         app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -43,4 +43,9 @@ public class QuizListViewModel extends ViewModel implements QuizListRepository.o
     public void onError(Exception e) {
         Log.d("Quiz Error", "onError: " + e.getMessage());
     }
+
+
+    public void addQuiz(QuizListModel quizListModel){
+        database.addQuiz(quizListModel);
+    }
 }

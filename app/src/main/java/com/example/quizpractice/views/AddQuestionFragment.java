@@ -2,21 +2,48 @@ package com.example.quizpractice.views;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.quizpractice.Adapter.AddQuizAdapter;
 import com.example.quizpractice.Adapter.QuizListAdapter;
+import com.example.quizpractice.Model.QuestionModel;
+import com.example.quizpractice.Model.QuizListModel;
 import com.example.quizpractice.R;
+import com.example.quizpractice.viewmodel.HistoryViewModel;
+import com.example.quizpractice.viewmodel.QuestionViewModel;
+import com.example.quizpractice.viewmodel.QuizListViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class AddQuestionFragment extends Fragment implements QuizListAdapter.OnItemCLickedListener {
+public class AddQuestionFragment extends Fragment {
+    private NavController navController;
+    private QuizListViewModel viewModel;
+    private RecyclerView recyclerView;
+    private AddQuizAdapter adapter;
+    private QuestionModel[] questions;
+    private String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+    final Handler handler = new Handler();
+    private Button addQuizButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        viewModel = new ViewModelProvider(this , ViewModelProvider.AndroidViewModelFactory
+                .getInstance(getActivity().getApplication())).get(QuizListViewModel.class);
     }
 
     @Override
@@ -27,7 +54,30 @@ public class AddQuestionFragment extends Fragment implements QuizListAdapter.OnI
     }
 
     @Override
-    public void onItemClick(int positon) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        String quizTitle = getArguments().getString("title");
+        String difficulty = getArguments().getString("difficulty");
+        int questionNumber = getArguments().getInt("questionNumber");
+        questions = new QuestionModel[questionNumber];
+        navController = Navigation.findNavController(view);
+        addQuizButton = view.findViewById(R.id.done_add_question);
+        recyclerView = view.findViewById(R.id.addQuestionRecyclerView);
 
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        adapter = new AddQuizAdapter(questions);
+        recyclerView.setAdapter(adapter);
+        addQuizButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adapter.notifyDataSetChanged();
+                QuizListModel quizListModel = new QuizListModel(quizTitle, "https://firebasestorage.googleapis.com/v0/b/quizzapp-29ac9.appspot.com/o/music.jpg?alt=media&token=a6b6ee59-57cf-47a7-b12b-35f39578456d", difficulty, questionNumber, questions, currentUserId);
+                viewModel.addQuiz(quizListModel);
+                NavDirections action = AddQuestionFragmentDirections.addQuestionFragmentToListFragment();
+                navController.navigate(action);
+            }
+        });
     }
 }

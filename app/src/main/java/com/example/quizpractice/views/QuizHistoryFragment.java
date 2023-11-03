@@ -91,7 +91,7 @@ public class QuizHistoryFragment extends Fragment implements HistoryListAdapter.
                     }
                 });
             }
-        }, 3000);
+        }, 1000);
 
 
     }
