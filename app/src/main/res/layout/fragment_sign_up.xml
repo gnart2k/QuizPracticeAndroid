@@ -10,12 +10,11 @@
 
     <ImageView
         android:id="@id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/write"
+        android:layout_width="217dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/quiz_logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
