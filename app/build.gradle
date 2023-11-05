@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'com.example.quizpractice'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.quizpractice"
@@ -43,9 +43,13 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.6.0'
     implementation 'com.google.firebase:firebase-firestore:24.8.1'
     implementation 'com.google.firebase:firebase-auth:22.1.2'
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation 'com.firebaseui:firebase-ui-auth:8.0.2'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
 
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'

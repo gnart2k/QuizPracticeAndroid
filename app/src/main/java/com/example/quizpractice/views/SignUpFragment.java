@@ -1,3 +1,4 @@
+
 package com.example.quizpractice.views;
 import android.os.Bundle;
 
@@ -26,7 +27,8 @@ public class SignUpFragment extends Fragment {
 
     private AuthViewModel viewModel;
     private NavController navController;
-    private EditText editEmail , editPass;
+    private EditText editEmail , editPass, reEditPass;
+
     private TextView signInText;
     private Button signUpBtn;
 
@@ -45,6 +47,7 @@ public class SignUpFragment extends Fragment {
         navController = Navigation.findNavController(view);
         editEmail = view.findViewById(R.id.editEmailSignUp);
         editPass = view.findViewById(R.id.editPassSignUp);
+        reEditPass = view.findViewById(R.id.reEditPassSignUp);
         signInText = view.findViewById(R.id.signInText);
         signUpBtn = view.findViewById(R.id.signUpBtn);
 
@@ -60,7 +63,11 @@ public class SignUpFragment extends Fragment {
             public void onClick(View v) {
                 String email = editEmail.getText().toString();
                 String pass = editPass.getText().toString();
-                if (!email.isEmpty() && !pass.isEmpty()){
+                String reEditPassStr = reEditPass.getText().toString();
+
+                if(!reEditPassStr.equals(pass)){
+                    Toast.makeText(getContext(), "Retype password is incorrect, please try again", Toast.LENGTH_SHORT).show();
+                }else if (!email.isEmpty() && !pass.isEmpty()){
                     viewModel.signUp(email , pass);
                     Toast.makeText(getContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
                     viewModel.getFirebaseUserMutableLiveData().observe(getViewLifecycleOwner(), new Observer<FirebaseUser>() {

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,14 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.example.quizpractice.Adapter.QuizListAdapter;
 import com.example.quizpractice.Model.QuizListModel;
 import com.example.quizpractice.R;
 
-import com.example.quizpractice.Model.QuizListModel;
-import com.example.quizpractice.viewmodel.AuthViewModel;
 import com.example.quizpractice.viewmodel.QuizListViewModel;
 
 import java.util.List;
@@ -33,6 +33,8 @@ public class ListFragment extends Fragment implements QuizListAdapter.OnItemCLic
     private NavController navController;
     private QuizListViewModel viewModel;
     private QuizListAdapter adapter;
+
+    private Button addButton, historyBtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class ListFragment extends Fragment implements QuizListAdapter.OnItemCLic
 
         recyclerView = view.findViewById(R.id.listQuizRecyclerview);
         progressBar = view.findViewById(R.id.quizListProgressBar);
+        addButton = view.findViewById(R.id.addQuizBtn);
+        historyBtn = view.findViewById(R.id.historyBtn);
         navController = Navigation.findNavController(view);
 
         recyclerView.setHasFixedSize(true);
@@ -72,13 +76,29 @@ public class ListFragment extends Fragment implements QuizListAdapter.OnItemCLic
             }
         });
 
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavDirections action = ListFragmentDirections.actionListFragmentToAddQuizFragment();
+                Navigation.findNavController(view).navigate(action);
+            }
+        });
+
+        historyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavDirections action = ListFragmentDirections.actionListFragmentToHistoryFragment();
+                Navigation.findNavController(view).navigate(action);
+            }
+        });
+
     }
 
     @Override
-    public void onItemClick(int positon) {
-//        ListFragmentDirections.ActionListFragmentToDetailFragment action = ListFragmentDirections.
-//                actionListFragmentToDetailFragment();
-//        action.setPosition();
-        //navController.navigate(action);
+    public void onItemClick(int position) {
+        ListFragmentDirections.ActionListFragmentToDetailFragment action =
+                ListFragmentDirections.actionListFragmentToDetailFragment();
+        action.setPosition(position);
+        navController.navigate(action);
     }
 }

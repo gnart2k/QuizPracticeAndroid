@@ -37,6 +37,8 @@ public class DetailFragment extends Fragment {
     private QuizListViewModel viewModel;
     private ImageView topicImage;
     private String quizId;
+    private String quizTitle;
+
     private long totalQueCount;
 
 
@@ -58,44 +60,39 @@ public class DetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        title = view.findViewById(R.id.detailFragmentDifficulty);
+        title = view.findViewById(R.id.detailFragmentTitle);
         difficulty = view.findViewById(R.id.detailFragmentDifficulty);
         totalQuestions = view.findViewById(R.id.detailFragmentQuestions);
         startQuizBtn = view.findViewById(R.id.startQuizBtn);
         ProgressBar progressBar = view.findViewById(R.id.detailProgressBar);
         navController = Navigation.findNavController(view);
         topicImage = view.findViewById(R.id.detailFragmentImage);
-        //position = DetailFragmentArgs.fromBundle(getArguments()).getPosition();
+        position = DetailFragmentArgs.fromBundle(getArguments()).getPosition();
 
         viewModel.getQuizListLiveData().observe(getViewLifecycleOwner(), new Observer<List<QuizListModel>>() {
             @Override
             public void onChanged(List<QuizListModel> quizListModels) {
-//                QuizListModel quiz = QuizListModel.get(position);
-//                difficulty.setText(quiz.getDifficulty());
-//                title.setText(quiz.getTitle());
-//                totalQuestions.setText(String.valueOf(quiz.getQuestions()));
-//                Glide.with(view).load(quiz.getImage()).into(topicImage);
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                    }
-                },2000);
-//                totalQueCount = quiz.getQuestions();
-//                quizId = quiz.getQuizId();
+                QuizListModel quiz = quizListModels.get(position);
+                difficulty.setText(quiz.getDifficulty());
+                title.setText(quiz.getTitle());
+                quizTitle = quiz.getTitle();
+                totalQuestions.setText(String.valueOf(quiz.getQuestions()));
+                Glide.with(view).load(quiz.getImage()).into(topicImage);
+                totalQueCount = quiz.getQuestions();
+                quizId = quiz.getQuizId();
             }
         });
         startQuizBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                DetailFragmentDirections.ActionDetailFragmentToQuizFragment action =
-//                        DetailFragmentDirections.actionDetailFragmentToQuizFragment();
-//
-//                action.setQuizId(quizId);
-//                action.setTotalQueCount(totalQueCount);
-                //navController.navigate(action);
+                DetailFragmentDirections.ActionDetailFragmentToQuizragment action =
+                        DetailFragmentDirections.actionDetailFragmentToQuizragment();
+                action.setQuizId(quizId);
+                action.setTotalQueCount(totalQueCount);
+                action.setQuizTitle(quizTitle);
+                navController.navigate(action);
             }
         });
+
     }
 }
