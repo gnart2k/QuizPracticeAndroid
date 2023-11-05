@@ -42,14 +42,14 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
     @Override
     public void onBindViewHolder(@NonNull HistoryListViewHolder holder, int position) {
         ResultModel model = resultModels.get(position);
-        holder.title.setText(model.getQuizTitle());
+        holder.title.setText("Quiz Tittle: " + model.getQuizTitle());
         Log.d("check", model.getCorrect() + "");
-        holder.correctAnswer.setText(String.valueOf(model.getCorrect()));
-        holder.wrongAnswer.setText(String.valueOf(model.getWrong()));
-        holder.noAnswer.setText(String.valueOf(model.getNotAnswer()));
-//        holder.timestamp.setText(String.valueOf(model.getDate()));
+        holder.correctAnswer.setText("Correct Answer: " + model.getCorrect());
+        holder.wrongAnswer.setText("Wrong Answer: " + model.getWrong());
+        holder.noAnswer.setText("No Answer: " + model.getNotAnswer());
+//        holder.timestamp.setText(model.getDate()));
         long score = (model.getCorrect() / (model.getWrong() + model.getNotAnswer() + model.getCorrect())) * 100;
-        holder.score.setText(String.valueOf(score) + "/100");
+        holder.score.setText("Score: " + score + "/100");
 
     }
 

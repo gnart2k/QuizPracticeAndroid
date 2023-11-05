@@ -37,4 +37,8 @@
     <string name="title">Title</string>
     <string name="number_of_questions">Number of questions</string>
     <string name="retype_password">Retype password</string>
+    <string name="correct_answer">Correct Answer</string>
+    <string name="wrong_answer">Wrong Answer</string>
+    <string name="not_answer">Not Answer</string>
+    <string name="score">Score</string>
 </resources>

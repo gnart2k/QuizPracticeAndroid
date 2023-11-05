@@ -11,13 +11,13 @@
         android:layout_width="389dp"
         android:layout_height="726dp"
         android:layout_marginStart="1dp"
+        android:layout_marginTop="84dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="101dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ProgressBar
+    <ProgressBar
             android:id="@+id/quizListProgressBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
@@ -29,7 +29,6 @@
             android:indeterminateTint="@color/light_sky"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5" />
-<!--    <<<<<<< Updated upstream-->
 
 
     <ImageView
@@ -39,43 +38,43 @@
         android:layout_marginTop="1dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/Quiz_logo" />
+        app:srcCompat="@drawable/quiz_logo" />
 
-    <ImageView
+    <Button
         android:id="@+id/historyBtn"
-        android:layout_width="45dp"
-        android:layout_height="29dp"
+        android:layout_width="40dp"
+        android:layout_height="33dp"
         android:layout_marginStart="92dp"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="35dp"
+        android:background="@drawable/history_svgrepo_com"
         app:layout_constraintEnd_toStartOf="@+id/addQuizBtn"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/history_svgrepo_com" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <Button
         android:id="@+id/addQuizBtn"
-        android:layout_width="45dp"
-        android:layout_height="29dp"
+        android:layout_width="39dp"
+        android:layout_height="33dp"
         android:layout_marginStart="172dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="33dp"
+        android:background="@drawable/add_to_queue_svgrepo_com"
         app:layout_constraintEnd_toStartOf="@+id/logOutBtn"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/add_to_queue_svgrepo_com" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <Button
         android:id="@+id/logOutBtn"
-        android:layout_width="45dp"
-        android:layout_height="24dp"
+        android:layout_width="36dp"
+        android:layout_height="34dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
+        android:background="@drawable/log_out_svgrepo_com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.996"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/log_out_svgrepo_com" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 

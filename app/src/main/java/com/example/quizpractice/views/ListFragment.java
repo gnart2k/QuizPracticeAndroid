@@ -23,7 +23,9 @@ import com.example.quizpractice.Adapter.QuizListAdapter;
 import com.example.quizpractice.Model.QuizListModel;
 import com.example.quizpractice.R;
 
+import com.example.quizpractice.viewmodel.AuthViewModel;
 import com.example.quizpractice.viewmodel.QuizListViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -32,9 +34,10 @@ public class ListFragment extends Fragment implements QuizListAdapter.OnItemCLic
     private ProgressBar progressBar;
     private NavController navController;
     private QuizListViewModel viewModel;
+    private AuthViewModel authViewModel;
     private QuizListAdapter adapter;
 
-    private Button addButton, historyBtn;
+    private Button addButton, historyBtn, logoutButton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,6 +51,8 @@ public class ListFragment extends Fragment implements QuizListAdapter.OnItemCLic
 
         viewModel = new ViewModelProvider(this , ViewModelProvider.AndroidViewModelFactory
                 .getInstance(getActivity().getApplication())).get(QuizListViewModel.class);
+        authViewModel = new ViewModelProvider(this , ViewModelProvider.AndroidViewModelFactory
+                .getInstance(getActivity().getApplication())).get(AuthViewModel.class);
     }
 
     @Override
@@ -58,6 +63,7 @@ public class ListFragment extends Fragment implements QuizListAdapter.OnItemCLic
         progressBar = view.findViewById(R.id.quizListProgressBar);
         addButton = view.findViewById(R.id.addQuizBtn);
         historyBtn = view.findViewById(R.id.historyBtn);
+        logoutButton = view.findViewById(R.id.logOutBtn);
         navController = Navigation.findNavController(view);
 
         recyclerView.setHasFixedSize(true);
@@ -91,6 +97,18 @@ public class ListFragment extends Fragment implements QuizListAdapter.OnItemCLic
                 Navigation.findNavController(view).navigate(action);
             }
         });
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                authViewModel.signOut();
+                NavDirections action = ListFragmentDirections.actionListFragmentToSignInFragment();
+                Navigation.findNavController(view).navigate(action);
+            }
+        });
+
+
 
     }
 

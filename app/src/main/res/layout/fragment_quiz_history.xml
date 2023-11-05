@@ -13,13 +13,12 @@
         android:id="@+id/historyTv"
         android:layout_width="118dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="20dp"
         android:text="History"
         android:textColor="#00BCD4"
         android:textColorLink="#03A9F4"
-        android:textSize="34sp" />
-
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/quizHistoryProgressBar"
@@ -37,7 +36,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/historyRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="630dp"
-        android:layout_marginTop="100dp" />
+        android:layout_height="730dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

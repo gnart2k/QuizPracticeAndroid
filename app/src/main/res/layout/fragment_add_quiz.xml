@@ -52,7 +52,6 @@
         android:background="@drawable/round_btn"
         android:backgroundTint="@color/light_sky"
         android:text="@string/fui_next_default"
-        android:background="@color/design_default_color_primary"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
