@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/Quiz_logo" />
 
-    <ImageView
+    <Button
         android:id="@+id/historyBtn"
         android:layout_width="45dp"
         android:layout_height="29dp"
