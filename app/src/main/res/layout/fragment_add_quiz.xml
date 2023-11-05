@@ -49,6 +49,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
+        android:background="@drawable/round_btn"
+        android:backgroundTint="@color/light_sky"
         android:text="@string/fui_next_default"
         android:background="@color/design_default_color_primary"
         android:textColor="@color/white"
