@@ -3,7 +3,11 @@
     android:shape="rectangle">
 
     <solid android:color="@color/black"/>
+<<<<<<< Updated upstream
     <corners android:radius="100dp"/>
 
+=======
+    <corners android:radius="150dp"/>
+>>>>>>> Stashed changes
 
 </shape>
