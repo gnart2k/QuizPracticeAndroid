@@ -6,20 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id = "@+id/historyRecyclerViewLayout"
-    tools:context=".views.QuizHistoryFragment">
+    tools:context=".views.QuizHistoryFragment"
+    android:backgroundTintMode="screen"
+    >
 
 
-    <TextView
+    <ImageButton
         android:id="@+id/historyTv"
-        android:layout_width="118dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="20dp"
-        android:text="History"
+        android:layout_width="81dp"
+        android:layout_height="53dp"
+        android:background="@drawable/history_svgrepo_com"
         android:textColor="#00BCD4"
         android:textColorLink="#03A9F4"
-        android:textSize="34sp" />
-
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints" />
 
     <ProgressBar
         android:id="@+id/quizHistoryProgressBar"
@@ -39,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="630dp"
         tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="97dp" />
+        tools:layout_editor_absoluteY="97dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

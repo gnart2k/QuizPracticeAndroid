@@ -34,7 +34,7 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="95dp"
+        android:layout_width="112dp"
         android:layout_height="69dp"
         android:layout_marginTop="1dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,39 +43,40 @@
 
     <Button
         android:id="@+id/historyBtn"
-        android:layout_width="45dp"
+        android:layout_width="39dp"
         android:layout_height="29dp"
         android:layout_marginStart="92dp"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="35dp"
+        android:background="@drawable/history_svgrepo_com"
         app:layout_constraintEnd_toStartOf="@+id/addQuizBtn"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/history_svgrepo_com" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <Button
         android:id="@+id/addQuizBtn"
-        android:layout_width="45dp"
+        android:layout_width="39dp"
         android:layout_height="29dp"
         android:layout_marginStart="172dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="33dp"
+        android:background="@drawable/add_to_queue_svgrepo_com"
         app:layout_constraintEnd_toStartOf="@+id/logOutBtn"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/add_to_queue_svgrepo_com" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/logOutBtn"
-        android:layout_width="45dp"
-        android:layout_height="24dp"
+        android:layout_width="39dp"
+        android:layout_height="29dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.996"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/log_out_svgrepo_com" />
+        android:background="@drawable/log_out_svgrepo_com" />
 
 
 
