@@ -68,13 +68,25 @@ public class QuestionModel {
         this.timer = timer;
     }
 
-    public QuestionModel(String questionID, String answer, String question, String option_a, String option_b, String option_c, long timer) {
-        this.questionID = questionID;
+    public QuestionModel( String question,String answer, String option_a, String option_b, String option_c, long timer) {
         this.answer = answer;
         this.question = question;
         this.option_a = option_a;
         this.option_b = option_b;
         this.option_c = option_c;
         this.timer = timer;
+    }
+
+    @Override
+    public String toString() {
+        return "QuestionModel{" +
+                "questionID='" + questionID + '\'' +
+                ", answer='" + answer + '\'' +
+                ", question='" + question + '\'' +
+                ", option_a='" + option_a + '\'' +
+                ", option_b='" + option_b + '\'' +
+                ", option_c='" + option_c + '\'' +
+                ", timer=" + timer +
+                '}';
     }
 }

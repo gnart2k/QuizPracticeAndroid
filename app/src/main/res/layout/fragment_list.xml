@@ -23,13 +23,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listQuizRecyclerview"
-        android:layout_width="389dp"
+        android:layout_width="match_parent"
         android:layout_height="726dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -45,4 +45,32 @@
         android:indeterminateTint="@color/light_sky"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" />
+
+
+
+    <Button
+        android:id="@+id/addQuizBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/add_quiz"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.723"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/historyBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="HISTORY"
+        android:background="@color/design_default_color_primary"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/addQuizBtn"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

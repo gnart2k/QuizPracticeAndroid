@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@+id/splashFragment">
     <fragment
-        android:id="@+id/splashFragment"
+        android:id="@id/splashFragment"
         android:name="com.example.quizpractice.views.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
@@ -47,12 +47,128 @@
         tools:layout="@layout/fragment_list" >
         <action
             android:id="@+id/action_listFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_addQuizFragment"
+            app:destination="@id/addQuizFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.quizpractice.views.QuizHistoryFragment"
+        android:label="quizHistoryFragment"
+        tools:layout="@layout/fragment_quiz_history" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/addQuizFragment"
+        android:name="com.example.quizpractice.views.AddQuizFragment"
+        android:label="fragment_add_quiz"
+        tools:layout="@layout/fragment_add_quiz" >
+        <action
+            android:id="@+id/addQuizFragment_to_ListFragment"
+            app:destination="@id/listFragment"
             />
+        <action
+            android:id="@+id/addQuizFragment_to_AddQuestionFragment"
+            app:destination="@id/addQuestionFragment"
+            />
+
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="difficulty"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="numberOfQuestion"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addQuestionFragment"
+        android:name="com.example.quizpractice.views.AddQuestionFragment"
+        android:label="fragment_add_question"
+        tools:layout="@layout/fragment_add_question" >
+        <action
+            android:id="@+id/addQuestionFragment_to_ListFragment"
+            app:destination="@id/listFragment"
+            />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.quizpractice.views.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailFragment_to_quizragment"
+            app:destination="@id/quizFragment" />
+        <argument
+            android:name="position"
+            app:argType="integer"
+            android:defaultValue="0" />
+
     </fragment>
     <fragment
         android:id="@+id/quizFragment"
         android:name="com.example.quizpractice.views.QuizFragment"
         android:label="fragment_quiz"
-        tools:layout="@layout/fragment_quiz" />
+        tools:layout="@layout/fragment_quiz" >
+        <action
+            android:id="@+id/action_quizFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+        <action
+            android:id="@+id/action_quizFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <argument
+            android:name="quizId"
+            app:argType="string"
+            android:defaultValue="null"/>
+        <argument
+            android:name="totalQueCount"
+            app:argType="long"
+            android:defaultValue="0L"/>
+        <argument
+            android:name="quizTitle"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.quizpractice.views.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/action_resultFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <argument
+            android:name="quizId"
+            app:argType="string"
+            android:defaultValue="null"
+            />
+        <argument
+            android:name="correctAnswer"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <argument
+            android:name="notAnswer"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <argument
+            android:name="notCorrectAnswer"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
+
+
 
 </navigation>
