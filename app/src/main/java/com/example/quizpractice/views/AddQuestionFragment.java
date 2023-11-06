@@ -73,7 +73,7 @@ public class AddQuestionFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 adapter.notifyDataSetChanged();
-                QuizListModel quizListModel = new QuizListModel(quizTitle, "https://firebasestorage.googleapis.com/v0/b/quizzapp-29ac9.appspot.com/o/music.jpg?alt=media&token=a6b6ee59-57cf-47a7-b12b-35f39578456d", difficulty, questionNumber, questions, currentUserId);
+                QuizListModel quizListModel = new QuizListModel(quizTitle,"https://firebasestorage.googleapis.com/v0/b/quizzapp-29ac9.appspot.com/o/add_icon.png?alt=media&token=7e9c2b91-a020-470e-9f76-264661747239&_gl=1*1nqi8gt*_ga*MTE0MDAzNzY0Mi4xNjk3ODUyMTYy*_ga_CW55HF8NVT*MTY5OTI3Mzk5MC4xMi4xLjE2OTkyNzc0NTcuMTAuMC4w", difficulty, questionNumber, questions, currentUserId);
                 viewModel.addQuiz(quizListModel);
                 NavDirections action = AddQuestionFragmentDirections.addQuestionFragmentToListFragment();
                 navController.navigate(action);
