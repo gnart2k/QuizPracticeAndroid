@@ -8,22 +8,23 @@
     >
 
     <EditText
-        android:id="@+id/quizTitleAddQuiz"
+        android:id="@+id/quizDifficulityAddQuiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="41dp"
         android:ems="10"
         android:hint="@string/difficulity"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/quizDifficulityAddQuiz" />
+        app:layout_constraintTop_toBottomOf="@+id/quizTitleAddQuiz" />
 
     <EditText
-        android:id="@+id/quizDifficulityAddQuiz"
+        android:id="@+id/quizTitleAddQuiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="192dp"
+        android:layout_marginTop="96dp"
         android:ems="10"
         android:hint="@string/title"
         android:inputType="text"
@@ -36,13 +37,14 @@
         android:id="@+id/numberOfQuestionsAddQuiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="@string/number_of_questions"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/quizDifficulityAddQuiz" />
+        app:layout_constraintTop_toBottomOf="@+id/quizDifficulityAddQuiz" />
 
     <Button
         android:id="@+id/nextToCreateQuyestionAddQuiz"
