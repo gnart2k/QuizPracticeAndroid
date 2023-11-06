@@ -16,9 +16,11 @@ import com.example.quizpractice.Model.QuestionModel;
 import com.example.quizpractice.Model.QuizListModel;
 import com.example.quizpractice.Model.ResultModel;
 import com.example.quizpractice.R;
+import com.example.quizpractice.utils.MyUtils;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AddQuizAdapter extends RecyclerView.Adapter<AddQuizAdapter.AddQuizListViewHolder> {
@@ -50,9 +52,11 @@ public class AddQuizAdapter extends RecyclerView.Adapter<AddQuizAdapter.AddQuizL
     public void onBindViewHolder(@NonNull AddQuizListViewHolder holder, int position) {
         String questionTitle = holder.questionTitle.getText().toString();
         String answer1_correct = holder.answer1_correct.getText().toString();
+        String correctAnswer = answer1_correct;
         String answer2 = holder.answer2.getText().toString();
         String answer3 = holder.answer3.getText().toString();
-        QuestionModel questionModel = new QuestionModel(questionTitle, answer1_correct, answer1_correct, answer2, answer3, 10);
+        List<String> shuffledString = MyUtils.shuffleThreeStrings(answer1_correct, answer2, answer3);
+        QuestionModel questionModel = new QuestionModel(questionTitle, correctAnswer, shuffledString.get(0) , shuffledString.get(1), shuffledString.get(2), 10);
         questionModels[position] = questionModel;
         Log.d("Question", questionModel.toString());
     }
