@@ -39,9 +39,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/historyRecyclerView"
         android:layout_width="match_parent"
+<<<<<<< Updated upstream
         android:layout_height="630dp"
         tools:layout_editor_absoluteX="26dp"
         tools:layout_editor_absoluteY="97dp"
         tools:ignore="MissingConstraints" />
+=======
+        android:layout_height="730dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="-16dp" />
+>>>>>>> Stashed changes
 
 </androidx.constraintlayout.widget.ConstraintLayout>
